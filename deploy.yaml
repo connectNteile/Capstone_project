@@ -1,0 +1,21 @@
+name: deploy to kuberetes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Kubernetes
+      uses: aws/setup-kubectl@v1
+      with:
+	version: '1.21.01
+      - name: Deploy to kubernetes
+        run: |
+          kubectl apply -f microservices-demo/deploy/kubernetes/completes-demo.yaml
